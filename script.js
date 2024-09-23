@@ -10,12 +10,13 @@ let fields = [
     null
 ];
 
+let currentPlayer = 'circle';
+
 function init() {
     render();
 }
 
 function render() {
-    fields = [null, 'circle', 'circle', 'circle', null, null, 'cross', 'cross', null];
     let content = document.getElementById('content');
     let html = '<table>';
 
@@ -25,13 +26,22 @@ function render() {
             let index = i * 3 + j;
             let value = fields[index];
             let displayValue = value === 'circle' ? generateCircleSVG() : (value === 'cross' ? generateCrossSVG() : '');
-            html += `<td>${displayValue}</td>`;
+            html += `<td onclick="handleClick(${index}, this)">${displayValue}</td>`;
         }
         html += '</tr>';
     }
 
     html += '</table>';
     content.innerHTML = html;
+}
+
+function handleClick(index, cell) {
+    if (fields[index] === null) {
+        fields[index] = currentPlayer;
+        cell.innerHTML = currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG();
+        cell.onclick = null; // Entfernt den onclick-Handler
+        currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle'; // Wechselt den Spieler
+    }
 }
 
 function generateCircleSVG() {
