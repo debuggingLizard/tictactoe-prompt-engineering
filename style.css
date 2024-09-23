@@ -30,7 +30,6 @@ body {
 #content {
     display: flex;
     align-items: center;
-    /* flex: 1; */
     position: relative;
 }
 
@@ -38,6 +37,7 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 td {
     width: 100px;
     height: 100px;
@@ -54,12 +54,15 @@ td:hover {
 td:first-child {
     border-left: none;
 }
+
 td:last-child {
     border-right: none;
 }
+
 tr:first-child td {
     border-top: none;
 }
+
 tr:last-child td {
     border-bottom: none;
 }
