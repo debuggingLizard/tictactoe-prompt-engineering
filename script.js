@@ -14,6 +14,7 @@ let currentPlayer = 'circle';
 
 function init() {
     render();
+    updatePlayerIndicator();
 }
 
 function render() {
@@ -33,7 +34,7 @@ function render() {
     }
 
     html += '</table>';
-    html += `<svg id="winningLine" width="316" height="316" style="position: absolute; top: 0; left: 0; display: none;"></svg>`;
+    html += `<svg id="winningLine" width="300" height="300" style="position: absolute; top: 0; left: 0; display: none;"></svg>`;
     html += '</div>';
     content.innerHTML = html;
 }
@@ -47,6 +48,7 @@ function handleClick(index, cell) {
             drawWinningLine();
         } else {
             currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle'; // Wechselt den Spieler
+            updatePlayerIndicator();
         }
     }
 }
@@ -100,4 +102,35 @@ function generateCrossSVG() {
             <line x1="60" y1="10" x2="10" y2="60" stroke="#fec000" stroke-width="10" />
         </svg>
     `;
+}
+
+function updatePlayerIndicator() {
+    let circleIndicator = document.getElementById('circleIndicator');
+    let crossIndicator = document.getElementById('crossIndicator');
+    circleIndicator.innerHTML = generateCircleSVG();
+    crossIndicator.innerHTML = generateCrossSVG();
+    if (currentPlayer === 'circle') {
+        circleIndicator.classList.remove('inactive');
+        crossIndicator.classList.add('inactive');
+    } else {
+        circleIndicator.classList.add('inactive');
+        crossIndicator.classList.remove('inactive');
+    }
+}
+
+function restartGame() {
+    fields = [
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null
+    ];
+    currentPlayer = 'circle';
+    render();
+    updatePlayerIndicator();
 }
