@@ -12,7 +12,8 @@ body {
 #content {
     display: flex;
     align-items: center;
-    flex:1;
+    flex: 1;
+    position: relative;
 }
 
 table {
